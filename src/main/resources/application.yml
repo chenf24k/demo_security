@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://cdb-nvns7bew.cd.tencentcdb.com:10098/zimuge?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: ChenF24K
+  freemarker:
+    cache: false # 缓存配置 开发阶段应该配置为false 因为经常会改
+    suffix: .html # 模版后缀名 默认为ftl
+    charset: UTF-8 # 文件编码
+    template-loader-path: classpath:/templates
+  security:
+    loginType: JSON
+    user:
+      name: admin
+      password: admin
