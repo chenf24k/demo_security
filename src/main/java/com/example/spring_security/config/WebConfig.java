@@ -2,6 +2,7 @@ package com.example.spring_security.config;
 
 import com.example.spring_security.auth.AuthenticationFailureHandler;
 import com.example.spring_security.auth.AuthenticationSuccessHandler;
+import com.example.spring_security.auth.ExpiredSessionStrategy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -53,6 +54,9 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                 .invalidSessionUrl("/login.html")// session 失效时 指定重新登录的页面
                 .sessionFixation().migrateSession()
+                .maximumSessions(1) // 最大允许同时登录数为一个
+                .maxSessionsPreventsLogin(false)// 允许再次登录，之前的登录会下线
+                .expiredSessionStrategy(new ExpiredSessionStrategy())
         ;
 
     }
