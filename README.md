@@ -72,6 +72,12 @@ stateless:  不创建session，适合无状态应用
             http-only: false
             secure: false
 
+### session 超时 和 多端登录踢出机制
+· 实现 SessionInformationExpiredStrategy
+    .maximumSessions(1) // 最大允许同时登录数为一个
+    .maxSessionsPreventsLogin(false)// 允许再次登录，之前的登录会下线
+    .expiredSessionStrategy(new ExpiredSessionStrategy())
+
 
 
 
