@@ -5,13 +5,13 @@
  Source Server Type    : MySQL
  Source Server Version : 50718
  Source Host           : cdb-nvns7bew.cd.tencentcdb.com:10098
- Source Schema         : platform-apis
+ Source Schema         : zimuge
 
  Target Server Type    : MySQL
  Target Server Version : 50718
  File Encoding         : 65001
 
- Date: 14/06/2020 20:14:43
+ Date: 14/06/2020 22:22:35
 */
 
 SET NAMES utf8mb4;
@@ -34,7 +34,7 @@ CREATE TABLE `sys_menu`  (
   `level` tinyint(4) NULL DEFAULT NULL COMMENT '组织层级',
   `status` tinyint(4) NULL DEFAULT NULL COMMENT '0: 启用。 1:禁用',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_menu
@@ -44,6 +44,7 @@ INSERT INTO `sys_menu` VALUES (2, 1, '1', 1, '用户管理', '/sysuser', NULL, N
 INSERT INTO `sys_menu` VALUES (3, 1, '1', 1, '日志管理', '/syslog', NULL, NULL, 2, 2, 0);
 INSERT INTO `sys_menu` VALUES (4, 1, '1', 1, '业务一', '/biz1', NULL, NULL, 3, 2, 0);
 INSERT INTO `sys_menu` VALUES (5, 1, '1', 1, '业务二', '/biz2', NULL, NULL, 4, 2, 0);
+INSERT INTO `sys_menu` VALUES (6, 1, '1', 1, '看板', '/analysis', NULL, NULL, 5, 2, 0);
 
 -- ----------------------------
 -- Table structure for sys_org
@@ -80,19 +81,20 @@ CREATE TABLE `sys_role`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `role_name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '角色名称',
   `role_desc` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '角色描述',
-  `role_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'ADMIN',
+  `role_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'ADMIN、DBA',
   `sort` int(11) NULL DEFAULT NULL COMMENT '排序',
   `status` int(11) NULL DEFAULT NULL COMMENT '0表示可用',
   `create_time` timestamp(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_role
 -- ----------------------------
-INSERT INTO `sys_role` VALUES (1, '管理员', '管理员', 'admin', 1, 0, '2020-06-07 20:25:38');
-INSERT INTO `sys_role` VALUES (2, '测试', '测试', 'tester', 2, 0, '2020-06-14 20:02:50');
-INSERT INTO `sys_role` VALUES (3, '研发', '研发', 'dev', 3, 0, '2020-06-14 20:03:22');
+INSERT INTO `sys_role` VALUES (1, '管理员', '管理员', 'ROLE_admin', 1, 0, '2020-06-14 21:14:16');
+INSERT INTO `sys_role` VALUES (2, '测试', '测试', 'ROLE_tester', 2, 0, '2020-06-14 21:14:23');
+INSERT INTO `sys_role` VALUES (3, '研发', '研发', 'ROLE_dev', 3, 0, '2020-06-14 21:14:26');
+INSERT INTO `sys_role` VALUES (4, '访客', '访客', 'ROLE_guest', 4, 0, '2020-06-14 21:14:28');
 
 -- ----------------------------
 -- Table structure for sys_role_menu
@@ -103,7 +105,7 @@ CREATE TABLE `sys_role_menu`  (
   `role_id` int(11) NULL DEFAULT NULL COMMENT '角色ID',
   `menu_id` int(11) NULL DEFAULT NULL COMMENT '权限ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_role_menu
@@ -112,10 +114,13 @@ INSERT INTO `sys_role_menu` VALUES (1, 1, 2);
 INSERT INTO `sys_role_menu` VALUES (2, 1, 3);
 INSERT INTO `sys_role_menu` VALUES (3, 1, 4);
 INSERT INTO `sys_role_menu` VALUES (4, 1, 5);
-INSERT INTO `sys_role_menu` VALUES (5, 2, 4);
-INSERT INTO `sys_role_menu` VALUES (6, 2, 5);
-INSERT INTO `sys_role_menu` VALUES (7, 3, 4);
-INSERT INTO `sys_role_menu` VALUES (8, 3, 5);
+INSERT INTO `sys_role_menu` VALUES (5, 1, 6);
+INSERT INTO `sys_role_menu` VALUES (6, 2, 4);
+INSERT INTO `sys_role_menu` VALUES (7, 2, 5);
+INSERT INTO `sys_role_menu` VALUES (8, 2, 6);
+INSERT INTO `sys_role_menu` VALUES (9, 3, 4);
+INSERT INTO `sys_role_menu` VALUES (10, 3, 5);
+INSERT INTO `sys_role_menu` VALUES (11, 3, 6);
 
 -- ----------------------------
 -- Table structure for sys_user
