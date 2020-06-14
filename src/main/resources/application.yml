@@ -5,12 +5,12 @@ spring:
     username: root
     password: ChenF24K
   freemarker:
-    cache: false # »º´æÅäÖÃ ¿ª·¢½×¶ÎÓ¦¸ÃÅäÖÃÎªfalse ÒòÎª¾­³£»á¸Ä
-    suffix: .html # Ä£°æºó×ºÃû Ä¬ÈÏÎªftl
-    charset: UTF-8 # ÎÄ¼ş±àÂë
+    cache: false # ç¼“å­˜é…ç½® å¼€å‘é˜¶æ®µåº”è¯¥é…ç½®ä¸ºfalse å› ä¸ºç»å¸¸ä¼šæ”¹
+    suffix: .html # æ¨¡ç‰ˆåç¼€å é»˜è®¤ä¸ºftl
+    charset: UTF-8 # æ–‡ä»¶ç¼–ç 
     template-loader-path: classpath:/templates
   security:
-    loginType: JSON
+    loginType: json
     user:
       name: admin
       password: admin

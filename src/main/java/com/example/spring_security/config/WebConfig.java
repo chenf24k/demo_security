@@ -1,5 +1,6 @@
 package com.example.spring_security.config;
 
+import com.example.spring_security.auth.AuthenticationSuccessHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -9,15 +10,23 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import javax.annotation.Resource;
+
 @Configuration
 public class WebConfig extends WebSecurityConfigurerAdapter {
+
+    @Resource
+    private AuthenticationSuccessHandler successHandler;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // 开启表单登录
         http.formLogin()
                 .loginPage("/login.html")
                 .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/index")
+                // .defaultSuccessUrl("/index")
+                .failureUrl("/login.html")
+                .successHandler(successHandler)
                 .and()
 
                 // 资源访问控制
