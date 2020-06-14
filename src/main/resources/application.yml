@@ -14,3 +14,11 @@ spring:
     user:
       name: admin
       password: admin
+server:
+  port: 8080
+  servlet:
+    session:
+      timeout: 10s
+      cookie:
+        http-only: false
+        secure: false

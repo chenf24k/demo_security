@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -24,8 +25,9 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        // 开启表单登录
-        http.formLogin()
+        http.csrf().disable()
+                // 开启表单登录
+                .formLogin()
                 .loginPage("/login.html")
                 .loginProcessingUrl("/login")
                 // .defaultSuccessUrl("/index")
@@ -46,7 +48,13 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/sysuser").hasAuthority("sys:user")
                 .anyRequest().authenticated()
                 .and()
-                .csrf().disable();
+                // session 配置
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                .invalidSessionUrl("/login.html")// session 失效时 指定重新登录的页面
+                .sessionFixation().migrateSession()
+        ;
+
     }
 
     @Override
