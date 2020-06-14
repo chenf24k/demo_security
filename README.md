@@ -54,15 +54,17 @@ stateless:  不创建session，适合无状态应用
 · 即，对同一个cookies 的 sessionid 用户每次登录都将创建一个新的 HTTP 会话，旧的会话会失效，并且就会话属性将被复制
 · 设置为"none"时，原始会话不会无效
 · 设置"newSession"后，将创建一个干净的会话，不会复制就会话中的任何属性
+    ...
     .sessionManagement()
     .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
     .invalidSessionUrl("/login.html")// session 失效时 指定重新登录的页面
     .sessionFixation().migrateSession()
+    ...
     
 ### Cookie 的安全
 · httpOnly: 如果为true，则浏览器脚本 将无法访问cookie
 · secure: 如果为true，仅通过HTTPS链接发送cookie，HTTP无法携带cookie
-
+    ...
     server:
       port: 8080
       servlet:
@@ -71,13 +73,19 @@ stateless:  不创建session，适合无状态应用
           cookie:
             http-only: false
             secure: false
+    ...
 
 ### session 超时 和 多端登录踢出机制
 · 实现 SessionInformationExpiredStrategy
+    ...
     .maximumSessions(1) // 最大允许同时登录数为一个
     .maxSessionsPreventsLogin(false)// 允许再次登录，之前的登录会下线
     .expiredSessionStrategy(new ExpiredSessionStrategy())
+    ...
 
 
-
+### Role-Based Access Control
+· 用户:系统接口 及 访问的操作者
+· 权限:能够访问某个接口或做某操作的授权资格
+· 角色:具有一类相同操作权限的用户的总称
 
