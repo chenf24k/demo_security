@@ -27,7 +27,7 @@ public class AuthenticationFailureHandler extends SimpleUrlAuthenticationFailure
         if (loginType.equalsIgnoreCase("JSON")) {
             response.setContentType("application/json;charset=UTF-8");
             response.getWriter().write(objectMapper.writeValueAsString(AjaxResponse.error(
-                    new CustomException(CustomExceptionType.USER_INPUT_ERROR, "用户或密码输入错误")
+                    new CustomException(CustomExceptionType.USER_INPUT_ERROR)
             )));
         } else {
             super.onAuthenticationFailure(request, response, exception);

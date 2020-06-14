@@ -7,8 +7,13 @@ public class CustomException {
     public CustomException() {
     }
 
-    public CustomException(CustomExceptionType exceptionType, String message){
+    public CustomException(CustomExceptionType exceptionType) {
         this.code = exceptionType.getCode();
+        this.message = exceptionType.getTypeDesc();
+    }
+
+    public CustomException(int code, String message) {
+        this.code = code;
         this.message = message;
     }
 

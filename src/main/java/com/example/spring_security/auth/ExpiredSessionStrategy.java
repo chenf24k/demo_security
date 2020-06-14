@@ -21,14 +21,8 @@ public class ExpiredSessionStrategy implements SessionInformationExpiredStrategy
 
     @Override
     public void onExpiredSessionDetected(SessionInformationExpiredEvent sessionInformationExpiredEvent) throws IOException, ServletException {
-        objectMapper.writeValueAsString(AjaxResponse.error(new CustomException(CustomExceptionType.SESSION_ERROR, CustomExceptionType.SESSION_ERROR.getTypeDesc())));
         sessionInformationExpiredEvent.getResponse().setContentType("application/json;charset=UTF-8");
         sessionInformationExpiredEvent.getResponse().getWriter().write(
-                objectMapper.writeValueAsString(
-                        new CustomException(
-                                CustomExceptionType.SESSION_ERROR, CustomExceptionType.SESSION_ERROR.getTypeDesc()
-                        )
-                )
-        );
+                objectMapper.writeValueAsString(new CustomException(CustomExceptionType.SESSION_ERROR)));
     }
 }
