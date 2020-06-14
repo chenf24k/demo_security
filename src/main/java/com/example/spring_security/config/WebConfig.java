@@ -1,5 +1,6 @@
 package com.example.spring_security.config;
 
+import com.example.spring_security.auth.AuthenticationFailureHandler;
 import com.example.spring_security.auth.AuthenticationSuccessHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,6 +19,9 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
     @Resource
     private AuthenticationSuccessHandler successHandler;
 
+    @Resource
+    private AuthenticationFailureHandler failureHandler;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // 开启表单登录
@@ -25,8 +29,9 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login.html")
                 .loginProcessingUrl("/login")
                 // .defaultSuccessUrl("/index")
-                .failureUrl("/login.html")
+                // failureUrl("/login.html")
                 .successHandler(successHandler)
+                .failureHandler(failureHandler)
                 .and()
 
                 // 资源访问控制
