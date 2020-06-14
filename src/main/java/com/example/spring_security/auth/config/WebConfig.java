@@ -1,4 +1,4 @@
-package com.example.spring_security.config;
+package com.example.spring_security.auth.config;
 
 import com.example.spring_security.auth.AuthenticationFailureHandler;
 import com.example.spring_security.auth.AuthenticationSuccessHandler;
