@@ -1,4 +1,4 @@
-package com.example.spring_security.auth;
+package com.example.spring_security.auth.mapper;
 
 import com.example.spring_security.auth.MyUserDetails;
 import org.apache.ibatis.annotations.Param;

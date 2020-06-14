@@ -44,6 +44,10 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
                 // 资源访问控制
                 .authorizeRequests()
                 .antMatchers("/login.html", "/login").permitAll()
+                .antMatchers("/index").authenticated()// 首页登录即可访问
+
+                .anyRequest().access("@rabcService.hasPermission(request,authentication)")
+                /*
                 .antMatchers("/biz1", "/biz2").hasAnyAuthority("ROLE_user", "ROLE_admin")
                 // .antMatchers("/syslog", "/sysuser").hasAnyAuthority("ROLE_admin")
                 // 角色是一种特殊的权限
@@ -52,6 +56,8 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/syslog").hasAuthority("/syslog")
                 .antMatchers("/sysuser").hasAuthority("/sysuser")
                 .anyRequest().authenticated()
+                 */
+
                 .and()
                 // session 配置
                 .sessionManagement()

@@ -1,7 +1,7 @@
-package com.example.spring_security.auth;
+package com.example.spring_security.auth.service;
 
 import com.example.spring_security.auth.MyUserDetails;
-import com.example.spring_security.auth.UserDetailsMapper;
+import com.example.spring_security.auth.mapper.UserDetailsMapper;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
