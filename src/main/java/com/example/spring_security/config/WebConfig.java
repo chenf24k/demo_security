@@ -23,10 +23,8 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
                 // 资源访问控制
                 .authorizeRequests()
                 .antMatchers("/login.html", "/login").permitAll()
-                .antMatchers("/biz1", "/biz2")
-                .hasAnyAuthority("ROLE_user", "ROLE_admin")
-                // .antMatchers("/syslog", "/sysuser")
-                // .hasAnyAuthority("ROLE_admin")
+                .antMatchers("/biz1", "/biz2").hasAnyAuthority("ROLE_user", "ROLE_admin")
+                // .antMatchers("/syslog", "/sysuser").hasAnyAuthority("ROLE_admin")
                 // 角色是一种特殊的权限
                 // .hasAnyRole("admin") 效果等同于 .hasAnyAuthority("ROLE_admin")
                 // 通过资源的权限id 类进行配置
