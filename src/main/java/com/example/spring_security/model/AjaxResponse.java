@@ -4,8 +4,10 @@ import com.example.spring_security.auth.exception.CustomException;
 import com.example.spring_security.auth.exception.CustomExceptionType;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class AjaxResponse {
+public class AjaxResponse implements Serializable {
     private int code;
     private String message;
     private Object data;
